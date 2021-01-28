@@ -57,7 +57,7 @@
                     </div>
                         <!-- pasidarau mygtuka -->
                         <div class="row mt-3 justify-content-center">
-                            <button type="button" class="btn btn-dark" id="submit" value="submit" name="submit">Submit</button>
+                            <button type="button" class="btn btn-dark" id="submit" value="submit" name="send">Submit</button>
                         </div>
                 </form>
 
