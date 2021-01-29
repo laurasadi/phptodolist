@@ -1,42 +1,55 @@
 <?php
 
 namespace TaskManager;
-
 use PDO;
-
 class Task
 {
     protected $pdo;
     private $subject;
     private $priority;
-    private $duedate;
+    private $dueDate;
     private $status = 0;
 
     public function __construct($pdo)
     {
         $this->pdo = $pdo;
-}
+    }
 
-    public function createTask($task)
-    {
+    public function createTask($task){
         $this->subject = $task['subject'];
-        $this->priority = $task ['priority'];
-        $this->duedate = $task ['duedate'];
+        $this->priority = $task['priority'];
+        $this->dueDate = $task['duedate'];
         $this->insertTask();
+
     }
 
     private function insertTask()
     {
-    try{
-        $query = "INSERT INTO 'task'(`subject`,`priority`,`dueDate`)VALUES (:subject, :priority, :duedate)";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':subject', $this->subject, PDO::PARAM_STR);
-        $stmt->bindParam(':priority', $this->priority, PDO::PARAM_STR);
-        $stmt->bindParam(':duedate', $this->duedate, PDO::PARAM_STR);
-        $stmt->execute();
-        header('Location/phptodolist');
-    } catch (PDOException $e) {
-        echo $e->getMessage();
+        try {
+            $query = "INSERT INTO `tasks` (`subject`, `priority`, `dueDate`, `status`)
+                        VALUES(:subject, :priority, :dueDate, :status)";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':subject', $this->subject, PDO::PARAM_STR);
+            $stmt->bindParam(':priority', $this->priority, PDO::PARAM_STR);
+            $stmt->bindParam(':dueDate', $this->dueDate, PDO::PARAM_STR);
+            $stmt->bindParam(':status', $this->status, PDO::PARAM_STR);
+            $stmt->execute();
+            header('Location:/');
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
+
+    public function allTasks()
+    {
+
+        $statement = $this->pdo->prepare("select * from tasks");
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
 }
