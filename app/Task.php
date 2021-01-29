@@ -9,7 +9,7 @@ class Task
     protected $pdo;
     private $subject;
     private $priority;
-    private $dueDate;
+    private $duedate;
     private $status = 0;
 
     public function __construct($pdo)
@@ -21,21 +21,20 @@ class Task
     {
         $this->subject = $task['subject'];
         $this->priority = $task ['priority'];
-        $this->dueDate = $task ['duedate'];
+        $this->duedate = $task ['duedate'];
         $this->insertTask();
     }
 
     private function insertTask()
     {
     try{
-        $query = "INSERT INTO 'task'(`subject`,`priority`,`dueDate`,`status`)VALUES (:subject, :priority, :dueData, :status)";
+        $query = "INSERT INTO 'task'(`subject`,`priority`,`dueDate`)VALUES (:subject, :priority, :duedate)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':subject', $this->subject, PDO::PARAM_STR);
         $stmt->bindParam(':priority', $this->priority, PDO::PARAM_STR);
-        $stmt->bindParam(':dueDate', $this->dueDate, PDO::PARAM_STR);
-        $stmt->bindParam(':status', $this->status, PDO::PARAM_STR);
+        $stmt->bindParam(':duedate', $this->duedate, PDO::PARAM_STR);
         $stmt->execute();
-        header('Location/');
+        header('Location/phptodolist');
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
