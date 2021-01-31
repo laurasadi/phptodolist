@@ -14,8 +14,9 @@
         </div>
         <!-- cia bus mano submit forma -->
         <div class="row" id="form">
+            <form>
             <div class="col-md">
-                <form>
+
                     <div class="form-group">
                         <label for="taskName">Task Name</label>
                         <input type="text" class="form-control" id="taskName">
