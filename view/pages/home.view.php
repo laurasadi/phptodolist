@@ -19,7 +19,12 @@
     <h3><?= $title ?></h3>
     <p><a href="/phptodolist/new-task" class="btn btn-dark">Nauja Užduotis</a></p>
 
-
+<?php if(isset($_SESSION['phptodolist/new-task'])): ?>
+    <div class="alert alert-primary" role="alert">
+        Užduotis sukurta: <?= ucfirst($_SESSION['phptodolist/new-task'][0]);
+        unset($_SESSION['phptodolist/new-task']);?>
+    </div>
+    <?php endif;?>
     <table class="table">
         <tbody id="tableForm">
         <thead class="thead-light">

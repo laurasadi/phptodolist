@@ -1,5 +1,8 @@
 <?php
 
+
+session_start();
+
 use TaskManager\DB;
 use TaskManager\Task;
 

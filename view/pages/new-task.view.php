@@ -18,6 +18,11 @@
 <div class="row m-lg-5">
 <h1><?=$title?></h1>
 
+<?php if (!empty($valid)):?>
+    <?php foreach ($valid as $klaida):?>;
+    <div class="alert alert-primary" role="alert"><?= $klaida?></div>
+    <?php endforeach;?>
+    <?php endif;?>
 <form method="post">
     <input type="text" name="subject" placeholder="Name task:"
     <label for="priority">Priority:</label>
